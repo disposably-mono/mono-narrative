@@ -1,0 +1,19 @@
+import streamlit as st
+import pandas as pd
+from analyse import analyse
+
+st.title("Mono — Narrative")
+
+war = pd.read_csv("data/war_raw.csv")
+peace = pd.read_csv("data/peace_raw.csv")
+
+war["theme"] = "war"
+peace["theme"] = "peace"
+df = pd.concat([war, peace])
+
+result = analyse(df)
+
+result.columns = ["era", "theme", "count", "mean_rating"]
+
+chart_data = result.pivot(index="era", columns="theme", values="mean_rating")
+st.line_chart(chart_data)
