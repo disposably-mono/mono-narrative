@@ -7,6 +7,18 @@ from fetch import fetch_all_movies
 def clean_data(theme):
 
     raw = fetch_all_movies(theme)
+
     df = pd.DataFrame(raw)
+
     df = df[["title", "release_date", "vote_average", "vote_count", "genre_ids"]]
+
+    df = df.dropna(subset=["release_date"])
+
+    df = df[df["vote_count"] > 10]
+
+    df["year"] = df["release_date"].str[:4]
+
     df.to_csv(f"data/{theme}_raw.csv", index=False)
+
+
+clean_data("war")
