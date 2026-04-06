@@ -3,6 +3,8 @@ import os
 import requests
 
 load_dotenv()
+
+# TODO: move key loading into a config module later
 key = os.getenv("TMDB_API_KEY")
 
 
@@ -14,6 +16,9 @@ def check_connection():
 
     if response.status_code == 200:
         print("connection succesful!")
+    if response.status_code != 200:
+        print(f"Error: {response.status_code}")
+        return []
 
 
 def fetch_movies(theme, page=1):
@@ -32,4 +37,10 @@ def fetch_movies(theme, page=1):
     return results
 
 
-fetch_movies("war")
+def fetch_all_movies(theme):
+    all_results = []
+    for page in range(1, 6):
+        results = fetch_movies(theme, page)
+        all_results += results
+
+    return all_results
