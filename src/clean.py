@@ -4,7 +4,7 @@ from fetch import fetch_all_movies
 # TODO: map genre_ids to genre names using TMDB /genre/movie/list endpoint
 
 
-def clean_data(theme):
+def clean_data(theme, label):
 
     raw = fetch_all_movies(theme)
 
@@ -18,7 +18,8 @@ def clean_data(theme):
 
     df["year"] = df["release_date"].str[:4]
 
-    df.to_csv(f"data/{theme}_raw.csv", index=False)
+    df.to_csv(f"data/{label}_raw.csv", index=False)
 
 
-clean_data("war")
+clean_data(["war", "conflict"], "war")
+clean_data(["peace", "harmony", "tranquility"], "peace")

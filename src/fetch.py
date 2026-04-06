@@ -37,10 +37,14 @@ def fetch_movies(theme, page=1):
     return results
 
 
-def fetch_all_movies(theme):
+def fetch_all_movies(themes):
     all_results = []
-    for page in range(1, 6):
-        results = fetch_movies(theme, page)
-        all_results += results
+    for theme in themes:
+        for page in range(1, 6):
+            results = fetch_movies(theme, page)
+            all_results += results
+
+            if not results:
+                break
 
     return all_results
