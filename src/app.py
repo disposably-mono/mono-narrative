@@ -24,5 +24,11 @@ st.caption(
 
 st.line_chart(chart_data, width="stretch")
 
+st.subheader("Number of Films by Era")
+st.caption("How much content exists per theme across each era.")
+
+count_data = result.pivot(index="era", columns="theme", values="count")
+st.bar_chart(count_data, use_container_width=True)
+
 with st.expander("View raw data"):
     st.dataframe(df)
