@@ -16,4 +16,13 @@ result = analyse(df)
 result.columns = ["era", "theme", "count", "mean_rating"]
 
 chart_data = result.pivot(index="era", columns="theme", values="mean_rating")
-st.line_chart(chart_data)
+
+st.subheader("Average Audience Rating by Era")
+st.caption(
+    "Comparing global perception of war vs. peace themed films across three eras."
+)
+
+st.line_chart(chart_data, width="stretch")
+
+with st.expander("View raw data"):
+    st.dataframe(df)
