@@ -19,6 +19,7 @@
 
 ## Structure
 
+```
 mono-narrative/
 ├── data/        ← raw and cleaned datasets
 ├── notebooks/   ← exploration and analysis
@@ -28,6 +29,7 @@ mono-narrative/
 │   ├── analyse.py   ← contrast logic
 │   └── app.py       ← Streamlit dashboard
 └── assets/      ← exports and static files
+```
 
 ## Setup
 
