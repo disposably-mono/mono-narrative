@@ -16,4 +16,20 @@ def check_connection():
         print("connection succesful!")
 
 
-check_connection()
+def fetch_movies(theme, page=1):
+    response = requests.get(
+        "https://api.themoviedb.org/3/search/movie",
+        headers={"Authorization": f"Bearer {key}"},
+        params={"query": theme, "page": page},
+    )
+
+    data = response.json()
+
+    results = data["results"]
+
+    print(f"Fetched {len(results)} movies for '{theme}' — page {page}")
+
+    return results
+
+
+fetch_movies("war")
